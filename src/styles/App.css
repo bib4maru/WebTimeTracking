@@ -1,0 +1,15 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.task__props {
+    text-align: left;
+    padding-bottom: 20px;
+}
+.charts__container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
