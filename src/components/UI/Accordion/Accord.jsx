@@ -22,7 +22,7 @@ const Accord = (props) => {
                     }}
                 >
                     <Typography className='task__props'>Проект: {props.project}</Typography>
-                    <Typography className='task__props'>Описание задачи: {props.descr}</Typography>
+                    <Typography className='task__props'>Описание задачи: {props.description}</Typography>
                     <Timecounter/>
                 </AccordionDetails>
             </Accordion>

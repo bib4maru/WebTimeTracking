@@ -7,9 +7,32 @@ import { PieChart, Pie, Cell, Tooltip,LineChart,
     Legend } from "recharts";
 
 const data1 = [
-    { name: "Полезное время", value: 40.5 },
-    { name: "Бесполезное время", value: 5 },
+    { name: "Полезное время", value: 7 },
+    { name: "Бесполезное время", value: 1 },
   ];
+
+// const data2 = [
+//   {
+//     name: "05/07/2023",
+//     useless: 1,
+//     useful: 7,
+//   },
+//   {
+//     name: "05/08/2023",
+//     useless: 0.5,
+//     useful: 7.5,
+//   },
+//   {
+//     name: "05/09/2023",
+//     useless: 3,
+//     useful: 5,
+//   },
+//   {
+//     name: "05/10/2023",
+//     useless: 7,
+//     useful: 1,
+//   }
+//   ]
 
   const data2 = [
     {
@@ -95,11 +118,11 @@ const Charts = () => {
             <Legend />
             <Line
                 type="monotone"
-                dataKey="pv"
+                dataKey="uv"
                 stroke="red"
                 activeDot={{ r: 8 }}
             />
-            <Line type="monotone" dataKey="uv" stroke="green" />
+            <Line type="monotone" dataKey="pv" stroke="green" />
             </LineChart>
         </div>
 );

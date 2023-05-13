@@ -1,8 +1,11 @@
 import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,FormControlLabel,Checkbox } from '@mui/material';
 import React from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useNavigate } from 'react-router-dom';
+
 
 const Authorization = () => {
+    const navigate = useNavigate();
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -53,6 +56,7 @@ const Authorization = () => {
                         fullWidth
                         variant='contained'
                         sx={{mt: 3, mb: 2}}
+                        onClick={() => navigate("/user")}
                     >
                         Войти
                     </Button>
