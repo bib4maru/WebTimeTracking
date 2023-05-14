@@ -1,4 +1,4 @@
-import { AppBar, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, IconButton, Toolbar} from '@mui/material';
 import React from 'react';
 import HomeIcon from '@mui/icons-material/Home';
 import { useNavigate } from 'react-router-dom';
@@ -14,9 +14,9 @@ const Headerbar = () => {
                 <IconButton edge="start" color="secondary" sx={{ml: "350px", mr: "100px"}} onClick={() => {navigate("/main")}}>
                     <HomeIcon/>
                 </IconButton>
-                <Button variant='text' size='large' color='secondary' sx={{mr: "80px"}} onClick={() => {navigate("/")}} >Проекты</Button>
-                <Button variant='text' size='large' color='secondary'sx={{mr: "80px"}}>Задачи</Button>
-                <Button variant='text' size='large' color='secondary' sx={{mr: "450px"}}>Сотрудники</Button>
+                <Button variant='text' size='large' color='secondary' sx={{mr: "80px"}} onClick={() => {navigate("/projects")}} >Проекты</Button>
+                <Button variant='text' size='large' color='secondary'sx={{mr: "80px"}} onClick={() => navigate("/tasks")}>Задачи</Button>
+                <Button variant='text' size='large' color='secondary' sx={{mr: "450px"}} onClick={() => navigate("/employees")}>Сотрудники</Button>
                 <Button color="secondary">
                   Войти  
                 </Button>

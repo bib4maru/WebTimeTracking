@@ -1,14 +1,13 @@
 import React from 'react';
 import Headerbar from '../components/UI/Navbar/Headerbar';
 import ProjectStatic from '../components/ProjectStatic';
-import CustomAddBtn from '../components/UI/Buttons/CustomAddBtn';
-
+import CustomDial from '../components/UI/Buttons/CustomDial'
 const ProjectPage = () => {
     return (
         <div>
             <Headerbar/>
             <ProjectStatic/>
-            <CustomAddBtn/>
+            <CustomDial action="Добавить проект" />
         </div>
     );
 };

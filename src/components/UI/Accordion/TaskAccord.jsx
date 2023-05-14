@@ -1,10 +1,11 @@
-import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Fab, Stack, TextField, Typography } from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Container, Typography,Box,TextField,Fab,Stack } from '@mui/material';
 import React from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import SaveIcon from '@mui/icons-material/Save';
 import CustomChip from '../Chip/CustomChip';
 import Timecounter from '../TimeCounters/Timecounter';
-import SaveIcon from '@mui/icons-material/Save';
-const ProjectAccord = (props) => {
+
+const TaskAccord = (props) => {
     return (
         <Container
             sx={{
@@ -13,8 +14,8 @@ const ProjectAccord = (props) => {
             }}
         >
             <Accordion>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography>{props.project}</Typography>
+                <AccordionSummary expandIcon={<ExpandMoreIcon />} >
+                    <Typography>{props.task}</Typography>
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
@@ -22,8 +23,9 @@ const ProjectAccord = (props) => {
                         flexDirection: "column",
                     }}
                 >
+                    <Typography className='task__props'>Проект: {props.project}</Typography>
                     <Box sx={{display: "flex", justifyContent: "space-between", mb: 2}}>
-                        <TextField label="Описание проекта" color='secondary' multiline 
+                        <TextField label="Описание задачи" color='secondary' multiline 
                         defaultValue={props.descr} fullWidth
                         />
                         <Fab size='medium' color='secondary'>
@@ -34,28 +36,19 @@ const ProjectAccord = (props) => {
                         sx={{
                             textAlign:"center",
                         }}
-                    >Список задач:</Typography>
+                    >Список сотрудников, назначенных на задачу:</Typography>
                     <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap"
                         sx={{
                             mb: 4,
                             mt: 4,
                         }}
                     >
-                        <CustomChip name="Составить такмлыщашыоыагщыщгарыагрыгр9гырпш0роы9рпррыfahia"/>
-                        <CustomChip name="Составить гг"/>
-                        <CustomChip name="Составить бб"/>
-                    </Stack>
-                    <Typography
-                        sx={{
-                            textAlign:"center",
-                        }}
-                    >Список сотрудников на проекте:</Typography>
-                    <Stack direction="row" spacing={2} useFlexGap flexWrap="wrap"
-                        sx={{
-                            mb: 4,
-                            mt: 4,
-                        }}
-                    >
+                        <CustomChip name="Иванов Иван Иванович" />
+                        <CustomChip name="Иванов Диназаур Иванович" />
+                        <CustomChip name="Иванов Иван Иванович" />
+                        <CustomChip name="Иванов Диназаур Иванович" />
+                        <CustomChip name="Иванов Иван Иванович" />
+                        <CustomChip name="Иванов Диназаур Иванович" />
                         <CustomChip name="Иванов Иван Иванович" />
                         <CustomChip name="Иванов Диназаур Иванович" />
                     </Stack>
@@ -67,4 +60,4 @@ const ProjectAccord = (props) => {
     );
 };
 
-export default ProjectAccord;
+export default TaskAccord;
