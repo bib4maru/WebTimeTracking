@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,FormControlLabel,Checkbox } from '@mui/material';
+import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,Grid,Link } from '@mui/material';
 import React from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
@@ -46,10 +46,6 @@ const Authorization = () => {
                         id='password'
                         autoComplete='current-password'
                     />
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="secondary" />}
-                        label="Запомнить меня"
-                    />
                     <Button
                         color='secondary'
                         type='submit'
@@ -60,6 +56,13 @@ const Authorization = () => {
                     >
                         Войти
                     </Button>
+                    <Grid container>
+                        <Grid item>
+                            <Link href="#" variant="body2" color="secondary">
+                                Еще нет аккаунта? Зарегистрироваться
+                            </Link>
+                        </Grid>
+                    </Grid>
                 </Box>
             </Box>
         </Container>
