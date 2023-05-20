@@ -1,10 +1,19 @@
 import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,Grid,Link } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
+import { login } from '../http/userAPI';
 
 
 const Authorization = () => {
+    const signIn = async (e) => {
+        e.preventDefault();
+        const responce = await login();
+        console.log(responce);
+    }
+    const [authlogin,setLogin] = useState("");
+    const [password,setPassword] = useState("");
+
     const navigate = useNavigate();
     return (
         <Container component="main" maxWidth="xs">
@@ -32,8 +41,9 @@ const Authorization = () => {
                         id='login'
                         label='Логин'
                         name='login'
-                        autoComplete="login"
                         autoFocus
+                        value={authlogin}
+                        onChange={e =>setLogin(e.target.value)}
                     />
                     <TextField
                         color='secondary'
@@ -44,7 +54,8 @@ const Authorization = () => {
                         label='Пароль'
                         type='password'
                         id='password'
-                        autoComplete='current-password'
+                        value={password}
+                        onChange={e =>setPassword(e.target.value)}
                     />
                     <Button
                         color='secondary'
@@ -52,7 +63,7 @@ const Authorization = () => {
                         fullWidth
                         variant='contained'
                         sx={{mt: 3, mb: 2}}
-                        onClick={() => navigate("/user")}
+                        onClick={signIn}
                     >
                         Войти
                     </Button>

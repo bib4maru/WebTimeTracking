@@ -1,7 +1,6 @@
-import { Container,Typography } from '@mui/material';
+import { Container,Grid,Typography,Button } from '@mui/material';
 import React from 'react';
-import EmployeeList from './EmployeeList';
-import CustomAddBtn from '../components/UI/Buttons/CustomAddBtn'
+import EmployeeAutoComplete from './EmployeeAutoComplete';
 const EmployeeCont = () => {
     return (
         <Container
@@ -18,7 +17,32 @@ const EmployeeCont = () => {
             }}
         >
             <Typography variant='h4'>Сотрудники</Typography>
-            <EmployeeList/>
+            {/* <EmployeeList/> */}
+            <EmployeeAutoComplete/>
+            <Grid container spacing={2} sx={{ width: 600 }} >
+                <Grid item xs={12} sm={6}>
+                    <Button
+                        color='secondary'
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Просмотр статистики
+                    </Button>
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                    <Button
+                        color='secondary'
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}
+                    >
+                        Удалить сотрудника
+                    </Button>
+                </Grid>
+            </Grid>
         </Container>
     );
 };
