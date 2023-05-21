@@ -1,8 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,Grid,Link } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useNavigate } from 'react-router-dom';
+import { registration } from '../http/userAPI';
 
 const Registration = () => {
+  const signUp = async (e) => {
+    try {
+      e.preventDefault();
+      const response = await registration(fname,lastname,patronomyc,authlogin,password,company);
+      console.log(response);
+      navigate("/");
+    } catch (e) {
+      alert(e.response.data.message);
+    }
+  }
+
+
+  const [company,Setcompany] = useState(''),
+        [fname,Setfname] = useState(''),
+        [lastname,Setlastname] = useState(''),
+        [patronomyc,Setpatronomyc] = useState(''),
+        [authlogin,setLogin] = useState(""),
+        [password,setPassword] = useState("");
+  const navigate = useNavigate();
+
     return (
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -30,19 +52,21 @@ const Registration = () => {
                   id="company"
                   label="Название компании"
                   name="company"
-                  autoComplete="email"
+                  autoFocus
+                  value={company}
+                  onChange={e => Setcompany(e.target.value) }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
                   color='secondary'
-                  autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
                   id="firstName"
                   label="Имя"
-                  autoFocus
+                  value={fname}
+                  onChange={e => Setfname(e.target.value) }
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -53,7 +77,20 @@ const Registration = () => {
                   id="lastName"
                   label="Фамилия"
                   name="lastName"
-                  autoComplete="family-name"
+                  value={lastname}
+                  onChange={e => Setlastname(e.target.value) }
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  color='secondary'
+                  required
+                  fullWidth
+                  id="patronomyc"
+                  label="Отчество"
+                  name="patronomyc"
+                  value={patronomyc}
+                  onChange={e =>Setpatronomyc(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -64,7 +101,8 @@ const Registration = () => {
                   id="login"
                   label="Логин"
                   name="login"
-                  autoComplete="email"
+                  value={authlogin}
+                  onChange={e =>setLogin(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -76,7 +114,8 @@ const Registration = () => {
                   label="Пароль"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  value={password}
+                  onChange={e =>setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>
@@ -86,12 +125,14 @@ const Registration = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={signUp}
             >
               Зарегистрироваться
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2" color='secondary'>
+                <Link href="" variant="body2" color='secondary' 
+                onClick={(e) => {e.preventDefault(); navigate("/")}}>
                   Уже есть аккаунт? Войти
                 </Link>
               </Grid>

@@ -10,7 +10,7 @@ const AdminMain = () => {
                 sx={{mt: 25,
                     textAlign: "center"
                 }}
-            > Добро пожаловать, user! </Typography>
+            > Добро пожаловать! </Typography>
         </div>
     );
 };

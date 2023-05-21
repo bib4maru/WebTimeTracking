@@ -1,19 +1,34 @@
 import { Avatar, Box, Button, Container, TextField, Typography,CssBaseline,Grid,Link } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
 import { login } from '../http/userAPI';
-
+import { useUser } from '../store/store';
+import {shallow} from 'zustand/shallow';
+import ErrorSnackBar from '../components/UI/Snackbar/ErrorSnackBar';
 
 const Authorization = () => {
     const signIn = async (e) => {
-        e.preventDefault();
-        const responce = await login();
-        console.log(responce);
+        try {
+            e.preventDefault();
+            const response = await login(authlogin,password);
+            newRole(response.role);
+            SetIsAuth(true);
+            navigate("/main");
+        } catch (e) {
+            SetMes(e.response.data.message);
+            alert(mes);
+            setOpen(true);
+            setLogin("");
+            setPassword("");
+        }
     }
+    const newRole = useUser((state) => (state.SetRole));
+    const {mes,SetMes} = useUser((state) => ({mes: state.errorMessage, SetMes: state.SetMes}));
+    const {isAuth,SetIsAuth} = useUser((state) => ({ isAuth: state.isAuth, SetIsAuth : state.SetIsAuth}));
     const [authlogin,setLogin] = useState("");
     const [password,setPassword] = useState("");
-
+    const [open,setOpen] = useState(false);
     const navigate = useNavigate();
     return (
         <Container component="main" maxWidth="xs">
@@ -32,7 +47,7 @@ const Authorization = () => {
                 <Typography component="h1" variant="h5">
                     Авторизация
                 </Typography>
-                <Box component="form" noValidate sx={{ mt: 1 }}>
+                <Box component="form" sx={{ mt: 1 }}>
                     <TextField
                         color='secondary'
                         margin='normal'
@@ -69,7 +84,8 @@ const Authorization = () => {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link href="#" variant="body2" color="secondary">
+                            <Link href="" variant="body2" color="secondary" 
+                            onClick={(e) => {e.preventDefault(); navigate("/reg")}}>
                                 Еще нет аккаунта? Зарегистрироваться
                             </Link>
                         </Grid>
