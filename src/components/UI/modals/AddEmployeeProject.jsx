@@ -7,9 +7,6 @@ import { addEmployeeToProject } from '../../../http/projectAPI';
 
 const icon = <CheckBoxOutlineBlankIcon fontSize="small" />;
 const checkedIcon = <CheckBoxIcon fontSize="small" />;
-const options = [
-    {title: "Проект 1"},{title: "Проект 2"},{title: "Проект 3"},{title: "Проект 4"},{title: "Проект 5"},{title: "Проект 6"},
-];
 const AddEmployeeProject = () => {
     const setStatus = useProjects(state => (state.setIsClickedEmployee));
     const projects = useProjects(state => (state.projects));

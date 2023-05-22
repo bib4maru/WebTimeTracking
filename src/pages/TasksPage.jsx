@@ -1,16 +1,16 @@
 import React from 'react';
 import Headerbar from '../components/UI/Navbar/Headerbar';
 import TaskStatic from '../components/TaskStatic';
-import CustomDial from '../components/UI/Buttons/CustomDial';
 import AddEmployeeTask from '../components/UI/modals/AddEmployeeTask';
 import CreateTaskModal from '../components/UI/modals/CreateTaskModal';
+import AddBtnTask from '../components/UI/Buttons/AddBtnTask';
 
 const TasksPage = () => {
     return (
         <div>
             <Headerbar/>
             <TaskStatic/>
-            <CustomDial action="Добавить задачу" />
+            <AddBtnTask/>
             <AddEmployeeTask/>
             <CreateTaskModal/>
         </div>

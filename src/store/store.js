@@ -55,3 +55,14 @@ export const useEmployee = create(devtools(set => ({
     }),
 })))
 
+export const useTask = create(set => ({
+    tasks: [],
+    setTasks : (arr) => set ( () => {
+        return {tasks: arr}
+    }),
+    isClicked: false,
+    setIsClicked : (bool) => set( () => {
+        return {isClicked : bool}
+    }),
+}))
+

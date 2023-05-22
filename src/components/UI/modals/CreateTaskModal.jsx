@@ -1,17 +1,36 @@
 import { Autocomplete, Box, Dialog, DialogContent, DialogTitle, TextField, Button } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
+import { useTask,useProjects } from '../../../store/store';
+import { CreateTask } from '../../../http/taskAPI';
 
 
-const options = [
-    {title: "Проект 1"},{title: "Проект 2"},{title: "Проект 3"},{title: "Проект 4"},{title: "Проект 5"},{title: "Проект 6"},
-];
 const CreateTaskModal = () => {
+    const setStatus = useTask(state => state.setIsClicked);
+    const projects = useProjects(state => (state.projects));
+    const [task,setTask] = useState({task_name: "", task_description: ""});
+    const [currproject,setCurrProject] = useState("");
+    const handleClose = () => {
+        setStatus(false);
+    }
+    const CreateTaskClick = async (e) => {
+        try{
+            e.preventDefault();
+            await CreateTask(task.task_name,task.task_description,currproject.project_name);
+            handleClose();
+        } catch (e) {
+            alert(e.response.data.message);
+        }
+    }
+
+
     return (
-        <Dialog open={false}>
+        <Dialog open={useTask(state => state.isClicked)} onClose={handleClose}>
             <DialogTitle>Создание задачи</DialogTitle>
             <DialogContent>
                 <Box component="form" noValidate sx={{ mt: 1 }}>
-                    <Autocomplete options={options} getOptionLabel={(option) => option.title} renderInput={(params) => <TextField {...params} label="Проекты" color='secondary' margin='normal' /> }/>
+                    <Autocomplete options={projects} getOptionLabel={(option) => option.project_name} 
+                    onChange={(e,newvalue) => setCurrProject(newvalue)}
+                    renderInput={(params) => <TextField {...params} label="Проекты" color='secondary' margin='normal' /> }/>
                     <TextField
                         color='secondary'
                         margin='normal'
@@ -20,7 +39,8 @@ const CreateTaskModal = () => {
                         id='taskName'
                         label='Название задачи'
                         name='taskName'
-                        autoFocus
+                        value={task.task_name}
+                        onChange={e => setTask({...task, task_name: e.target.value})}
                     />
                     <TextField
                         color='secondary'
@@ -30,6 +50,8 @@ const CreateTaskModal = () => {
                         id='taskDescr'
                         label='Описание задачи'
                         name='taskDescr'
+                        value={task.task_description}
+                        onChange={e => setTask({...task, task_description: e.target.value})}
                     />
                     <Button
                         color='secondary'
@@ -37,6 +59,7 @@ const CreateTaskModal = () => {
                         fullWidth
                         variant='contained'
                         sx={{mt: 3, mb: 2}}
+                        onClick={CreateTaskClick}
                     >
                         Создать задачу
                     </Button>
