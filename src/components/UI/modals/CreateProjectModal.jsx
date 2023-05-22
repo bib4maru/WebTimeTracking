@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import { useProjects } from '../../../store/store';
 import { postProject } from '../../../http/projectAPI';
 import { getAllProjects } from '../../../http/projectAPI';
-
 const CreateProjectModal = () => {
     const setStatus = useProjects(state => (state.setIsClicked));
     const AddProject = useProjects(state => (state.AddProject));

@@ -6,11 +6,13 @@ import { useProjects } from '../../../store/store';
 const CustomDial = (props) => {
     
     const setStatus = useProjects( (state) => (state.setIsClicked));
-
+    const setStatusSecondbtn = useProjects(state => (state.setIsClickedEmployee));
     const handleClick = () => {
         setStatus(true);
     }
-
+    const handleClickEmployee = () => {
+        setStatusSecondbtn(true);
+    }
     return (
         <div className='btn__container'>
             <SpeedDial
@@ -18,7 +20,7 @@ const CustomDial = (props) => {
             sx={{'& .MuiFab-primary': { backgroundColor: "#5e35b1", color: '#ffffff',  '&:hover': {backgroundColor: '#5e35b1'} } }}
             icon={<SpeedDialIcon />}
             >
-                <SpeedDialAction icon={<PersonAddIcon/>}  tooltipTitle="Добавить сотрудника"  />
+                <SpeedDialAction icon={<PersonAddIcon/>}  tooltipTitle="Добавить сотрудника" onClick={handleClickEmployee} />
                 <SpeedDialAction icon={<LibraryAddIcon/>} tooltipTitle={props.action} onClick={handleClick} />
             </SpeedDial>
         </div>

@@ -5,7 +5,6 @@ import CustomDial from '../components/UI/Buttons/CustomDial'
 import CreateProjectModal from '../components/UI/modals/CreateProjectModal';
 import AddEmployeeProject from '../components/UI/modals/AddEmployeeProject';
 const ProjectPage = () => {
-
     return (
         <div>
             <Headerbar/>

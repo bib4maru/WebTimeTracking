@@ -1,8 +1,8 @@
 import { api } from "."
 
 
-export const postProject = async (project_name, project_description, estimate_time) => {
-    const {data} = await api.post('/projects/', {project_name, project_description, estimate_time});
+export const CreateEmployee = async (first_name, last_name, patronomyc, login, password) => {
+    const {data} = await api.post('/employees/', {first_name, last_name, patronomyc, login, password});
     return data
 }
 

@@ -30,6 +30,10 @@ export const useProjects = create(devtools(set => ({
     isClickedProject : false,
     setIsClicked : (bool) => set( () => {
         return {isClickedProject : bool}
+    }),
+    isClickedEmployee : false,
+    setIsClickedEmployee : (bool) => set( () => {
+        return {isClickedEmployee: bool}
     })
 })))
 
@@ -44,6 +48,10 @@ export const useEmployee = create(devtools(set => ({
     employees: [],
     setEmployees : (arr) => set ( () => {
         return {employees: arr} 
-    })
+    }),
+    isClicked : false,
+    setIsClicked : (bool) => set( () => {
+        return {isClicked : bool}
+    }),
 })))
 
