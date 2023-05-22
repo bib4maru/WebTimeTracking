@@ -14,7 +14,7 @@ const ProjectAccord = (props) => {
         >
             <Accordion>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography>{props.project}</Typography>
+                    <Typography>{props.project.project_name}</Typography>
                 </AccordionSummary>
                 <AccordionDetails
                     sx={{
@@ -24,7 +24,7 @@ const ProjectAccord = (props) => {
                 >
                     <Box sx={{display: "flex", justifyContent: "space-between", mb: 2}}>
                         <TextField label="Описание проекта" color='secondary' multiline 
-                        defaultValue={props.descr} fullWidth
+                        defaultValue='aboba' fullWidth
                         />
                         <Fab size='medium' color='secondary'>
                             <SaveIcon/>
