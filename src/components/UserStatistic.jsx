@@ -5,16 +5,14 @@ import DateRangePicker from './UI/DateRange/DateRangePicker';
 import Accord from './UI/Accordion/Accord';
 import Charts from './UI/Graphs/Charts';
 import { useDate, useEmployee } from '../store/store';
-import { getOneEmployee } from '../http/employeeAPI';
+import { getActivity, getOneEmployee } from '../http/employeeAPI';
+import { formatDate } from '../utils/FormatDate';
 
 const UserStatistic = () => {
-
-    const timehistory = [{id: 1, date: "05/09/2023", useful_time: 7, useless_time: 1, employer_id: 1, task_id: 1}]
-
-    const tasks = [{id: 1, name: "Создание фронтенд части сайта", 
-    project: "Создание сайта для компании", desr: "Создание фронтенд части сайта, используя современные JS фреймворки"}]
+    const template = {HistoryOfWorks: []}
     const {toDate,setToDate} = useDate(state => ({toDate: state.toDate, setToDate: state.setToDate}));
     const {fromDate,setFromDate} = useDate(state => ({fromDate: state.fromDate, setFromDate: state.setFromDate}));
+    const [currActivity,setActivity] = useState({ HistoryOfWorks: []});
     const id = useEmployee(state => (state.id));
     const [curremployee,setCurrEmployee] = useState("");
     const handleOp = async() => {
@@ -25,10 +23,15 @@ const UserStatistic = () => {
     useEffect (() => {
         handleOp();
     },[])
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        console.log(fromDate);
-        console.log(toDate);
+        const from = formatDate(fromDate);
+        const to = formatDate(toDate);
+        const response = await getActivity(id,from,to);
+        if (response !== null) {setActivity(response);}
+        else {setActivity(template);}
+        console.log (response);
+
     }
     
     return (
@@ -49,7 +52,7 @@ const UserStatistic = () => {
             <Typography sx={{mt: 3, mb: 2}}>{curremployee.last_name} {curremployee.first_name} {curremployee.patronomyc} </Typography>
             <DateRangePicker/>
             <Button color='secondary' variant='contained' sx={{ mb: 4}} onClick={handleClick}>Сформировать статистику</Button>
-            {/* <Timecounter/> */}
+            <Timecounter project={currActivity} />
             <Typography variant='h5'
                 sx={{
                     textAlign: "center"

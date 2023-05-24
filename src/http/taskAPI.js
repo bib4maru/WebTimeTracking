@@ -10,3 +10,8 @@ export const getAllTasks = async () => {
     const {data} = await api.get('/tasks/');
     return data
 }
+
+export const getOneTask = async (id) => {
+    const {data} = await api.get(`/tasks/${id}`);
+    return data
+}

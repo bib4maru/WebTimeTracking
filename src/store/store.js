@@ -70,6 +70,10 @@ export const useTask = create(set => ({
     setIsClicked : (bool) => set( () => {
         return {isClicked : bool}
     }),
+    SingleTask: {task_description: "", Project : {}, Users:[], HistoryOfWorks: []},
+    setTask : (obj) => set ( () => {
+        return {SingleTask: obj} 
+    }),
 }))
 
 export const useSingleProject = create(set => ({

@@ -2,10 +2,11 @@ import { Autocomplete, Box, Dialog, DialogContent, DialogTitle, TextField, Butto
 import React, { useState } from 'react';
 import { useTask,useProjects } from '../../../store/store';
 import { CreateTask } from '../../../http/taskAPI';
-
+import { getAllTasks } from '../../../http/taskAPI';
 
 const CreateTaskModal = () => {
     const setStatus = useTask(state => state.setIsClicked);
+    const setTasks = useTask(state => (state.setTasks));
     const projects = useProjects(state => (state.projects));
     const [task,setTask] = useState({task_name: "", task_description: ""});
     const [currproject,setCurrProject] = useState("");
@@ -17,6 +18,7 @@ const CreateTaskModal = () => {
             e.preventDefault();
             await CreateTask(task.task_name,task.task_description,currproject.project_name);
             handleClose();
+            getAllTasks().then(data => setTasks(data));
         } catch (e) {
             alert(e.response.data.message);
         }

@@ -15,3 +15,8 @@ export const getOneEmployee = async (id) => {
     const {data} = await api.get(`/employees/${id}`);
     return data
 }
+
+export const getActivity = async (id,fromDate,toDate) => {
+    const {data} = await api.get(`/employees/${id}/activity?from=${fromDate}&to=${toDate}`);
+    return data
+}
