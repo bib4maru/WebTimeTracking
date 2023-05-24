@@ -1,8 +1,15 @@
 import { Container,Grid,Typography,Button } from '@mui/material';
 import React from 'react';
 import EmployeeAutoComplete from './EmployeeAutoComplete';
+import { useEmployee } from '../store/store';
+import { useNavigate } from 'react-router-dom';
 const EmployeeCont = () => {
-    
+    const id = useEmployee(state => (state.id));
+    const navigate = useNavigate();
+    const handleClick = (e) => {
+        e.preventDefault();
+        navigate(`/user/${id}`);
+    }
     return (
         <Container
             sx={{
@@ -28,6 +35,7 @@ const EmployeeCont = () => {
                         fullWidth
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
+                        onClick={handleClick}
                     >
                         Просмотр статистики
                     </Button>

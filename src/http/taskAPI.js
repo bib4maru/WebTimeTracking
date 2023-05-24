@@ -6,12 +6,7 @@ export const CreateTask = async (task_name, task_description, project_name) => {
     return data
 }
 
-export const getAllEmployees = async () => {
-    const {data} = await api.get('/employees/');
+export const getAllTasks = async () => {
+    const {data} = await api.get('/tasks/');
     return data
-}
-
-export const check = async () => {
-    const response = await api.post('/auth/login')
-    return response
 }

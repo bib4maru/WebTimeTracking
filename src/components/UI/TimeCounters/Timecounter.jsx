@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Paper, Typography } from '@mui/material';
-const Timecounter = () => {
+import { ComputeTime } from '../../../utils/ComputeTime';
+const Timecounter = (props) => {
+    const [time, setTime] = useState("");
+    useEffect(() => {
+        setTime(ComputeTime(props.project.HistoryOfWorks));
+    }, [props.project])
     return (
         <Box
                 sx={{
                     display: "flex",
                     flexDirection: "row",
                     justifyContent: "space-between",
-                    width: "45%",
+                    width: "60%",
                     marginBottom: 5,
                     alignSelf:"center"
                 }}
             >
+                
+
                 <Paper elevation={3}
                     sx={{
                         display: "flex",
@@ -25,11 +32,11 @@ const Timecounter = () => {
                             fontFamily: "'Exo 2', sans-serif;",
                         }}
                     >Полезное время</Typography>
-                    <Typography variant='h2' color="green"
+                    <Typography color="green"
                         sx={{
                             fontFamily: "'Exo 2', sans-serif;",
                         }}
-                    >25</Typography>
+                    >{time.usefull}</Typography>
                 </Paper>
                 <Paper elevation={3}
                     sx={{
@@ -44,11 +51,11 @@ const Timecounter = () => {
                             fontFamily: "'Exo 2', sans-serif;",
                         }}
                     >Бесполезное время</Typography>
-                    <Typography variant='h2' color="red"
+                    <Typography color="red"
                         sx={{
                             fontFamily: "'Exo 2', sans-serif;",
                         }}
-                    >5</Typography>
+                    >{time.useless}</Typography>
                 </Paper>
             </Box>
     );

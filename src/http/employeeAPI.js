@@ -11,7 +11,7 @@ export const getAllEmployees = async () => {
     return data
 }
 
-export const check = async () => {
-    const response = await api.post('/auth/login')
-    return response
+export const getOneEmployee = async (id) => {
+    const {data} = await api.get(`/employees/${id}`);
+    return data
 }

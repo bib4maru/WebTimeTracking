@@ -11,7 +11,7 @@ const CreateProjectModal = () => {
         setStatus(false);
     }
     const [project,setProject] = useState({project_name: '', project_description: "", estimate_time: 0});
-
+    
     const handleClick = async (e) => {
         try {
             e.preventDefault();

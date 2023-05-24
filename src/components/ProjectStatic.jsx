@@ -2,15 +2,18 @@ import { Container, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ProjectAccord from './UI/Accordion/ProjectAccord';
 import { getAllProjects } from '../http/projectAPI';
-import { useProjects } from '../store/store';
+import { useEmployee, useProjects } from '../store/store';
 import {shallow} from 'zustand/shallow';
+import { getAllEmployees } from '../http/employeeAPI';
 
 const ProjectStatic = () => {
     const [isLoading,setIsLoading]= useState(false);
+    const setEmployees = useEmployee(state => (state.setEmployees));
     const {projects,setProjects} = useProjects(state => ({projects: state.projects, setProjects: state.setProjects}),shallow);
 
     useEffect(()=> {
         getAllProjects().then(data => setProjects(data));
+        getAllEmployees().then(data => setEmployees(data));
     },[]);
 
 

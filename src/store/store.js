@@ -44,7 +44,7 @@ export const useTasks = create(devtools(set => ({
     })
 })))
 
-export const useEmployee = create(devtools(set => ({
+export const useEmployee = create(persist(devtools(set => ({
     employees: [],
     setEmployees : (arr) => set ( () => {
         return {employees: arr} 
@@ -53,7 +53,13 @@ export const useEmployee = create(devtools(set => ({
     setIsClicked : (bool) => set( () => {
         return {isClicked : bool}
     }),
-})))
+    id : "",
+    setId : (newId) => set( () => {
+        return {id : newId}
+    }),
+})),
+    {name: "employee-storage" }
+))
 
 export const useTask = create(set => ({
     tasks: [],
@@ -63,6 +69,24 @@ export const useTask = create(set => ({
     isClicked: false,
     setIsClicked : (bool) => set( () => {
         return {isClicked : bool}
+    }),
+}))
+
+export const useSingleProject = create(set => ({
+    project : {project_description: "", Tasks:[], Users:[], HistoryOfWorks: []},
+    setProject : (obj) => set ( () => {
+        return {project: obj} 
+    }),
+}))
+
+export const useDate = create(set => ({
+    fromDate: "",
+    toDate: "",
+    setFromDate : (date) => set( () => {
+        return {fromDate : date} 
+    }),
+    setToDate : (date) => set( () => {
+        return {toDate : date} 
     }),
 }))
 

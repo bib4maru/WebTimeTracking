@@ -1,10 +1,26 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Container, Fab, Stack, TextField, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CustomChip from '../Chip/CustomChip';
 import Timecounter from '../TimeCounters/Timecounter';
 import SaveIcon from '@mui/icons-material/Save';
+import { getOneProject } from '../../../http/projectAPI';
+import {shallow} from 'zustand/shallow';
+import { useSingleProject } from '../../../store/store';
+import { ComputeTime } from '../../../utils/ComputeTime';
 const ProjectAccord = (props) => {
+
+    const template = {project_description: "", Tasks:[], Users:[],HistoryOfWorks: []};
+    const {project,setProject} = useSingleProject(state => ({project: state.project, setProject: state.setProject}),shallow)
+    const handleClick = async (bool) => {
+        if (bool) {
+            const response = await getOneProject(props.project.id);
+            if (response !== null) {setProject(response);}
+            else {setProject(template)}
+            console.log (project);
+        }
+    }
+
     return (
         <Container
             sx={{
@@ -12,7 +28,7 @@ const ProjectAccord = (props) => {
                 mt: 3
             }}
         >
-            <Accordion>
+            <Accordion onChange={(e,expanded) => handleClick(expanded)}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                     <Typography>{props.project.project_name}</Typography>
                 </AccordionSummary>
@@ -23,8 +39,8 @@ const ProjectAccord = (props) => {
                     }}
                 >
                     <Box sx={{display: "flex", justifyContent: "space-between", mb: 2}}>
-                        <TextField label="Описание проекта" color='secondary' multiline 
-                        defaultValue='aboba' fullWidth
+                        <TextField placeholder='Описание проекта' color='secondary' multiline 
+                        value={project.project_description} fullWidth
                         />
                         <Fab size='medium' color='secondary'>
                             <SaveIcon/>
@@ -40,10 +56,10 @@ const ProjectAccord = (props) => {
                             mb: 4,
                             mt: 4,
                         }}
-                    >
-                        <CustomChip name="Составить такмлыщашыоыагщыщгарыагрыгр9гырпш0роы9рпррыfahia"/>
-                        <CustomChip name="Составить гг"/>
-                        <CustomChip name="Составить бб"/>
+                    >  
+                        {project.Tasks.map((task) => (
+                            <CustomChip name={task.task_name} key={task.id} />
+                        ))}
                     </Stack>
                     <Typography
                         sx={{
@@ -56,12 +72,14 @@ const ProjectAccord = (props) => {
                             mt: 4,
                         }}
                     >
-                        <CustomChip name="Иванов Иван Иванович" />
-                        <CustomChip name="Иванов Диназаур Иванович" />
+                        {project.Users.map((user) => (
+                            <CustomChip key={user.id} name={`${user.last_name} ${user.first_name} ${user.patronomyc}`}  />
+                        ))}
                     </Stack>
-                    <Timecounter/>
+                    <Timecounter project= {project} />
                 </AccordionDetails>
             </Accordion>
+
 
         </Container>
     );

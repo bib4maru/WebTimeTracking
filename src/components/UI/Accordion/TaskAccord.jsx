@@ -23,10 +23,10 @@ const TaskAccord = (props) => {
                         flexDirection: "column",
                     }}
                 >
-                    <Typography className='task__props'>Проект: {props.project}</Typography>
+                    <Typography className='task__props'>Проект: пвыпвапв</Typography>
                     <Box sx={{display: "flex", justifyContent: "space-between", mb: 2}}>
                         <TextField label="Описание задачи" color='secondary' multiline 
-                        defaultValue={props.descr} fullWidth
+                        defaultValue="fsafs" fullWidth
                         />
                         <Fab size='medium' color='secondary'>
                             <SaveIcon/>
@@ -52,7 +52,7 @@ const TaskAccord = (props) => {
                         <CustomChip name="Иванов Иван Иванович" />
                         <CustomChip name="Иванов Диназаур Иванович" />
                     </Stack>
-                    <Timecounter/>
+                    {/* <Timecounter/> */}
                 </AccordionDetails>
             </Accordion>
 

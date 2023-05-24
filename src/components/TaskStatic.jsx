@@ -1,8 +1,18 @@
 import { Container,Typography } from '@mui/material';
-import React from 'react';
+import React, { useEffect } from 'react';
 import TaskAccord from './UI/Accordion/TaskAccord';
-
+import { useTask, useProjects } from '../store/store';
+import {shallow} from 'zustand/shallow';
+import { getAllTasks } from '../http/taskAPI';
+import { getAllProjects } from '../http/projectAPI';
 const TaskStatic = () => {
+    const {tasks, setTasks} = useTask(state => ({tasks: state.tasks, setTasks: state.setTasks}),shallow);
+    const setProjects = useProjects(state => (state.setProjects));
+
+    useEffect(() => {
+        getAllTasks().then(data => setTasks(data));
+        getAllProjects().then(data => setProjects(data));
+    },[])
     return (
         <Container
             sx={{
@@ -18,11 +28,14 @@ const TaskStatic = () => {
             }}
         >
             <Typography variant='h4'>Задачи</Typography>
+            {tasks.map(task => (
+                <TaskAccord task ={task} key = {task.id}/>
+            ))}
+            {/* <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
             <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
             <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
             <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
+            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" /> */}
         </Container>
     );
 };
