@@ -4,15 +4,15 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import SaveIcon from '@mui/icons-material/Save';
 import CustomChip from '../Chip/CustomChip';
 import Timecounter from '../TimeCounters/Timecounter';
-import { useTask } from '../../../store/store';
-import { getOneTask} from '../../../http/taskAPI';
-
-const TaskAccord = (props) => {
+import { useEmployee,useTask } from '../../../store/store';
+import { getTaskActivity } from '../../../http/taskAPI';
+const CustomTaskAccord = (props) => {
     const template = {task_description: "", Project : {}, Users:[], HistoryOfWorks: []};
+    const id = useEmployee(state => (state.id));
     const {task,SetTask} = useTask (state => ({task: state.SingleTask, SetTask: state.setTask}));
     const handleClick = async (bool)  => {
         if (bool) {
-            const response = await getOneTask(props.task.id);
+            const response = await getTaskActivity(id,props.from,props.to,props.task.task_id);
             if (response !== null) {SetTask(response)}
             else {SetTask(template)}
         }
@@ -66,4 +66,4 @@ const TaskAccord = (props) => {
     );
 };
 
-export default TaskAccord;
+export default CustomTaskAccord;

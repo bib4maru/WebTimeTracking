@@ -31,11 +31,6 @@ const TaskStatic = () => {
             {tasks.map(task => (
                 <TaskAccord task ={task} key = {task.id}/>
             ))}
-            {/* <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" />
-            <TaskAccord project="smthprj" task="smthtask" descr="Сделать сайт" /> */}
         </Container>
     );
 };

@@ -7,12 +7,13 @@ import Charts from './UI/Graphs/Charts';
 import { useDate, useEmployee } from '../store/store';
 import { getActivity, getOneEmployee } from '../http/employeeAPI';
 import { formatDate } from '../utils/FormatDate';
+import CustomTaskAccord from './UI/Accordion/CustomTaskAccord';
 
 const UserStatistic = () => {
-    const template = {HistoryOfWorks: []}
+    const template = {HistoryOfWorks: [], Tasks: []}
     const {toDate,setToDate} = useDate(state => ({toDate: state.toDate, setToDate: state.setToDate}));
     const {fromDate,setFromDate} = useDate(state => ({fromDate: state.fromDate, setFromDate: state.setFromDate}));
-    const [currActivity,setActivity] = useState({ HistoryOfWorks: []});
+    const [currActivity,setActivity] = useState({ HistoryOfWorks: [], Tasks: []});
     const id = useEmployee(state => (state.id));
     const [curremployee,setCurrEmployee] = useState("");
     const handleOp = async() => {
@@ -68,10 +69,9 @@ const UserStatistic = () => {
             >
                 Список задач
             </Typography>
-            {/* <Accord task={tasks[0].name} project={tasks[0].project} description={tasks[0].desr} />
-            <Accord task="Задача 1" />
-            <Accord task="Задача 1" />
-            <Accord task="Задача 1" /> */}
+            {currActivity.Tasks.map((task) => (
+                <CustomTaskAccord key={task.task_id} task={task} from={formatDate(fromDate)} to={formatDate(toDate)} />
+            ))}
         </Container>
     );
 };
